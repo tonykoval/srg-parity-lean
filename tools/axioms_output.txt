@@ -1,0 +1,41 @@
+Build completed successfully (9027 jobs).
+BUILD_EXIT=0 build_elapsed=118s
+'Parity.even_det_odd' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Parity.centred_lattice' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Parity.centred_lattice_mod4' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Parity.srg_param' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Parity.centred_sq' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Parity.srg_parity' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Parity.srg_parity_mod4' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Parity.srg_parity_paper' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Parity.no_srg_169_42_5_12' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Parity.no_srg_NL' depends on axioms: [propext, Classical.choice, Quot.sound]
+@no_srg_169_42_5_12 : ∀ {V : Type u_1} [inst : Fintype V] [DecidableEq V] (Γ : SimpleGraph V)
+  [inst_2 : DecidableRel Γ.Adj], ¬Γ.IsSRGWith 169 42 5 12
+@no_srg_NL : ∀ {V : Type u_1} [inst : Fintype V] [DecidableEq V] (Γ : SimpleGraph V) [inst_2 : DecidableRel Γ.Adj]
+  (p e m lam : ℕ),
+  Nat.Prime p →
+    p % 4 = 1 →
+      Odd m → ↑lam = ↑m ^ 2 + 3 * ↑m - ↑(p ^ e) → ¬Γ.IsSRGWith ((p ^ e) ^ 2) (m * (p ^ e + 1)) lam (m * (m + 1))
+@srg_parity_paper : ∀ {V : Type u_1} [inst : Fintype V] [DecidableEq V] (Γ : SimpleGraph V)
+  [inst_2 : DecidableRel Γ.Adj] {v k l m : ℕ},
+  Γ.IsSRGWith v k l m →
+    0 < v →
+      ∀ (ρ θ : ℤ),
+        ρ ≠ θ →
+          ρ + θ = ↑l - ↑m →
+            ρ * θ = ↑m - ↑k →
+              ∀ (a b c ν ℓ : ℤ),
+                a = ↑v / ↑((↑v).gcd (↑k - ρ)) →
+                  b = a * (θ - ρ).sign →
+                    c = -(b * (↑k - ρ)) / ↑v →
+                      ν = c - b * ρ →
+                        ℓ = a * |θ - ρ| →
+                          Even ν →
+                            Odd ℓ →
+                              ∃ n,
+                                ↑n * ℓ = ↑v * ν ∧
+                                  Even n ∧
+                                    ∃ Δ,
+                                      0 < Δ ∧ (∀ (p : ℕ), Nat.Prime p → ↑p ∣ Δ → ↑p ∣ ℓ) ∧ (-1) ^ (n / 2) ≡ Δ [ZMOD 4]
+no sorry/native_decide/admit/axiom in sources
